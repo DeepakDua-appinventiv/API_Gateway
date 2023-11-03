@@ -21,7 +21,6 @@ public onModuleInit(): void {
 }
 
 @Get(':name')
-@UseGuards(AuthGuard)
 private async getShare(@Param('name') name: GetShareRequest): Promise<Observable<GetShareResponse>> {
     return this.svc.getShare(name); 
     }

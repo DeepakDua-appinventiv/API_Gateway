@@ -17,6 +17,6 @@ import { SHARES_SERVICE_NAME, SHARES_PACKAGE_NAME } from './shares.pb';
       },
     ]),
   ],
-  controllers: [SharesController]
+  controllers: [SharesController],
 })
 export class SharesModule {}
