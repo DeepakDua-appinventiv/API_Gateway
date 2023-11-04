@@ -1,4 +1,4 @@
-import { Controller, Inject, Post, OnModuleInit, UseGuards, Req, Param, Get } from '@nestjs/common';
+import { Controller, Inject, Post, OnModuleInit, UseGuards, Req, Param, Get, Query } from '@nestjs/common';
 import { ClientGrpc } from '@nestjs/microservices';
 import { Observable } from 'rxjs';
 import { AuthGuard } from 'src/users/users.guard';
@@ -20,8 +20,8 @@ public onModuleInit(): void {
     this.svc = this.client.getService<SharesServiceClient>(SHARES_SERVICE_NAME);
 }
 
-@Get(':name')
-private async getShare(@Param('name') name: GetShareRequest): Promise<Observable<GetShareResponse>> {
+@Get()
+private async getShare(@Query('name') name: GetShareRequest): Promise<Observable<GetShareResponse>> {
     return this.svc.getShare(name); 
     }
 }

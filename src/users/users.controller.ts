@@ -56,7 +56,7 @@ export class UsersController implements OnModuleInit {
 
   @Post('updatebalance')
   @UseGuards(AuthGuard)
-  private async updateBalance(@Body() body: UpdateBalanceRequest): Promise<Observable<UpdateBalanceResponse>> {
-    return this.wvs.updateBalance(body);
+  private async updateBalance(@Req() req: UpdateBalanceRequest): Promise<Observable<UpdateBalanceResponse>> {
+    return this.wvs.updateBalance(req);
   }
 }

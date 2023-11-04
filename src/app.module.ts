@@ -6,7 +6,7 @@ import { SharesModule } from './shares/shares.module';
 import { SharesController } from './shares/shares.controller';
 
 @Module({
-  imports: [UsersModule, SharesModule,],
+  imports: [UsersModule, SharesModule],
   controllers: [AppController],
   providers: [AppService],
 })
