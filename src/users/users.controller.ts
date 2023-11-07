@@ -15,7 +15,7 @@ import { UsersServiceClient,
          UpdateBalanceResponse,
          LogoutRequest,
          LogoutResponse} from './users.pb';
-import { AuthGuard } from './users.guard';
+import { AuthGuard, AuthGuardBody } from './users.guard';
 
 @Controller('users')
 export class UsersController implements OnModuleInit {
@@ -44,8 +44,11 @@ export class UsersController implements OnModuleInit {
   }
 
   @Get('logout')
-  private async logout(@Req() req: LogoutRequest): Promise<Observable<LogoutResponse>>{
-    return this.svc.logout(req);
+  @UseGuards(AuthGuard)
+  private async logout(@Req() req: any): Promise<Observable<LogoutResponse>>{
+    const userId = req.userId;
+    console.log('################',userId)
+    return this.svc.logout({token:userId});
   }
 
   @Get('getbalance')
@@ -55,8 +58,8 @@ export class UsersController implements OnModuleInit {
   }
 
   @Post('updatebalance')
-  @UseGuards(AuthGuard)
-  private async updateBalance(@Req() req: UpdateBalanceRequest): Promise<Observable<UpdateBalanceResponse>> {
-    return this.wvs.updateBalance(req);
+  @UseGuards(AuthGuardBody)
+  private async updateBalance(@Body() body: UpdateBalanceRequest): Promise<Observable<UpdateBalanceResponse>> {
+    return this.wvs.updateBalance(body);
   }
 }

@@ -1,7 +1,7 @@
 import { Controller, Inject, Post, OnModuleInit, UseGuards, Req, Param, Get, Query } from '@nestjs/common';
 import { ClientGrpc } from '@nestjs/microservices';
 import { Observable } from 'rxjs';
-import { AuthGuard } from 'src/users/users.guard';
+import { AuthGuard } from '../users/users.guard';
 import { Request } from 'express';
 import { SharesServiceClient,
          SHARES_SERVICE_NAME,
@@ -21,6 +21,7 @@ public onModuleInit(): void {
 }
 
 @Get()
+@UseGuards(AuthGuard)
 private async getShare(@Query('name') name: GetShareRequest): Promise<Observable<GetShareResponse>> {
     return this.svc.getShare(name); 
     }

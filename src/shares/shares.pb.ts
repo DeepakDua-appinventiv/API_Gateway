@@ -10,9 +10,11 @@ export interface Share {
   name: string;
   exchange: string;
   currentPrice: number;
+  quantity: number;
 }
 
 export interface GetShareRequest {
+  userId: string;
   name: string;
 }
 

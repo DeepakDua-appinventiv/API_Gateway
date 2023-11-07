@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { SharesController } from './shares.controller';
 import { SHARES_SERVICE_NAME, SHARES_PACKAGE_NAME } from './shares.pb';
+import { UsersModule } from 'src/users/users.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { SHARES_SERVICE_NAME, SHARES_PACKAGE_NAME } from './shares.pb';
         },
       },
     ]),
+    UsersModule
   ],
   controllers: [SharesController],
 })
