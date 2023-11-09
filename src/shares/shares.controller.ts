@@ -7,7 +7,9 @@ import { SharesServiceClient,
          SHARES_SERVICE_NAME,
          SHARES_PACKAGE_NAME,
          GetShareResponse,
-         GetShareRequest} from './shares.pb';
+         GetShareRequest,
+         GetCompanyRequest,
+         GetCompanyResponse} from './shares.pb';
 
 @Controller('shares')
 export class SharesController implements OnModuleInit{
@@ -20,9 +22,16 @@ public onModuleInit(): void {
     this.svc = this.client.getService<SharesServiceClient>(SHARES_SERVICE_NAME);
 }
 
-@Get()
+@Get('searchcompany')
 @UseGuards(AuthGuard)
-private async getShare(@Query('name') name: GetShareRequest): Promise<Observable<GetShareResponse>> {
-    return this.svc.getShare(name); 
+private async searchCompany(@Req() req: GetCompanyRequest): Promise<Observable<GetCompanyResponse>> {
+    return this.svc.searchCompany(req); 
     }
+
+@Get('getshares')
+@UseGuards(AuthGuard)
+private async getShares(@Query('companyId') companyId: string): Promise<Observable<GetShareResponse>> {
+    console.log(companyId);
+    return this.svc.getShare({companyId});
+}
 }

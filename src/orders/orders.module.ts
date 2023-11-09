@@ -2,6 +2,7 @@ import { Global, Module } from '@nestjs/common';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { OrdersController } from './orders.controller';
 import { ORDERS_SERVICE_NAME, ORDERS_PACKAGE_NAME } from './orders.pb';
+import { UsersModule } from 'src/users/users.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { ORDERS_SERVICE_NAME, ORDERS_PACKAGE_NAME } from './orders.pb';
         },
       },
     ]),
+    UsersModule
   ],
   controllers: [OrdersController]
 })

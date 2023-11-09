@@ -22,15 +22,16 @@ public onModuleInit(): void {
     this.svc = this.client.getService<OrdersServiceClient>(ORDERS_SERVICE_NAME);  
 }
 
-@Post('sell')
-private async sellShare(@Body() body: SellShareRequest): Promise<Observable<SellShareResponse>>{
-    return this.svc.sellShare(body);
-}
-
 @Post('buy')
 @UseGuards(AuthGuardBody)
 private async buyshare(@Body() body: BuyShareRequest): Promise<Observable<BuyShareResponse>>{
     return this.svc.buyShare(body);
+}
+
+@Post('sell')
+@UseGuards(AuthGuardBody)
+private async sellShare(@Body() body: SellShareRequest): Promise<Observable<SellShareResponse>>{
+    return this.svc.sellShare(body);
 }
 
 }

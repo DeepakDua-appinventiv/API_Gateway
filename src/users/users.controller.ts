@@ -47,7 +47,6 @@ export class UsersController implements OnModuleInit {
   @UseGuards(AuthGuard)
   private async logout(@Req() req: any): Promise<Observable<LogoutResponse>>{
     const userId = req.userId;
-    console.log('################',userId)
     return this.svc.logout({token:userId});
   }
 
