@@ -2,6 +2,13 @@ import { Injectable, CanActivate, ExecutionContext, HttpStatus, UnauthorizedExce
 // import { Request } from 'express';
 import { ValidateResponse } from './users.pb';
 import { UsersService } from './users.service';
+import { Request } from 'express';
+
+declare module 'express' {
+  interface Request {
+    userId: string;
+  }
+}
 
 @Injectable()
 export class AuthGuard implements CanActivate {

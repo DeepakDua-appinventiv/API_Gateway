@@ -24,14 +24,19 @@ public onModuleInit(): void {
 
 @Get('searchcompany')
 @UseGuards(AuthGuard)
-private async searchCompany(@Req() req: GetCompanyRequest): Promise<Observable<GetCompanyResponse>> {
-    return this.svc.searchCompany(req); 
+private async searchCompany(@Query('companyName') companyName: string): Promise<Observable<GetCompanyResponse>> {
+    const request: GetCompanyRequest = { name: companyName };
+    return this.svc.searchCompany(request); 
     }
 
 @Get('getshares')
 @UseGuards(AuthGuard)
-private async getShares(@Query('companyId') companyId: string): Promise<Observable<GetShareResponse>> {
+private async getShares(@Query('companyId') companyId: string, @Req() req: Request): Promise<Observable<GetShareResponse>> {
     console.log(companyId);
-    return this.svc.getShare({companyId});
+    const userId = req.userId;
+    return this.svc.getShare({
+        companyId,
+        userId
+    });
 }
 }

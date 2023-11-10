@@ -8,8 +8,10 @@ import { OrdersServiceClient,
          BuyShareRequest,
          BuyShareResponse,
          SellShareRequest,
-         SellShareResponse  } from './orders.pb';  
-import { AuthGuardBody } from 'src/users/users.guard';
+         SellShareResponse,  
+         GetInvestmentRequest,
+         GetInvestmentResponse} from './orders.pb';  
+import { AuthGuard, AuthGuardBody } from 'src/users/users.guard';
 
 @Controller('orders')
 export class OrdersController implements OnModuleInit{
@@ -26,6 +28,12 @@ public onModuleInit(): void {
 @UseGuards(AuthGuardBody)
 private async buyshare(@Body() body: BuyShareRequest): Promise<Observable<BuyShareResponse>>{
     return this.svc.buyShare(body);
+}
+
+@Get('investment')
+@UseGuards(AuthGuard)
+private async getMyInvestment(@Req() req: GetInvestmentRequest): Promise<Observable<GetInvestmentResponse>>{
+    return this.svc.getMyInvestment(req);
 }
 
 @Post('sell')
