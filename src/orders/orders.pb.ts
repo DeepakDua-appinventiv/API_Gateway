@@ -80,7 +80,6 @@ export interface GetBalanceResponse {
 export interface UpdateBalanceRequest {
   userId: string;
   walletAmount: number;
-  serviceName: string;
 }
 
 export interface UpdateBalanceResponse {

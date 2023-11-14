@@ -32,7 +32,6 @@ private async searchCompany(@Query('companyName') companyName: string): Promise<
 @Get('getshares')
 @UseGuards(AuthGuard)
 private async getShares(@Query('companyId') companyId: string, @Req() req: Request): Promise<Observable<GetShareResponse>> {
-    console.log(companyId);
     const userId = req.userId;
     return this.svc.getShare({
         companyId,
