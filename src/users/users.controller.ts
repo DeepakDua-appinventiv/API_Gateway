@@ -13,8 +13,14 @@ import { UsersServiceClient,
          WALLET_SERVICE_NAME, 
          UpdateBalanceRequest, 
          UpdateBalanceResponse,
+         forgetPasswordRequest,
+         forgetPasswordResponse,
+         resetPasswordRequest,
+         resetPasswordResponse,
          LogoutRequest,
-         LogoutResponse} from './users.pb';
+         LogoutResponse,
+         changePasswordRequest,
+         changePasswordResponse} from './users.pb';
 import { AuthGuard, AuthGuardBody } from './users.guard';
 
 @Controller('users')
@@ -41,6 +47,26 @@ export class UsersController implements OnModuleInit {
   @Post('login')
   private async login(@Body() body: LoginRequest): Promise<Observable<LoginResponse>> {
     return this.svc.login(body);
+  }
+
+  @Post('forgetPassword')
+  private async forgetPassword(@Body() body: forgetPasswordRequest): Promise<Observable<forgetPasswordResponse>> {
+    return this.svc.forgetPassword(body);
+  }
+
+  @Post('resetPassword')
+  private async resetPassword(@Body() body: resetPasswordRequest): Promise<Observable<resetPasswordResponse>> {
+    return this.svc.resetPassword(body);
+  }
+
+  @UseGuards(AuthGuard)
+  @Post('changePassword')
+  private async changePassword(@Body() body: changePasswordRequest, @Req() req:any): Promise<Observable<changePasswordResponse>> {
+    const changePasswordRequest:changePasswordRequest = {
+      ...body,
+      userId:req.userId
+    }
+    return this.svc.changePassword(changePasswordRequest)
   }
 
   @Get('logout')
