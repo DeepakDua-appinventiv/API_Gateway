@@ -19,6 +19,6 @@ import { UsersModule } from 'src/users/users.module';
     ]),
     UsersModule
   ],
-  controllers: [OrdersController]
+  controllers: [OrdersController],
 })
 export class OrdersModule {}
