@@ -41,9 +41,8 @@ export interface CheckAgreementStatusResponse {
 }
 
 export interface SubmitAgreementRequest {
+  userId: string;
   sellOrderId: string;
-  fullName: string;
-  address: string;
   signature: string;
 }
 
